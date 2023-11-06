@@ -95,8 +95,8 @@ function feldclick(rnr, snr) {
 
     // Festellen ob Figur und schreiben
     let Servierungsfaktor = 1;
-    let fig = figur();
     BestimmeZahlenAnzahl();
+    let fig = figur();    
     if (fig != "nix" && document.getElementById("Servieren").innerHTML == "serviert")
         Servierungsfaktor = 2;
 
@@ -105,72 +105,58 @@ function feldclick(rnr, snr) {
         for (let ii = 0; ii < 5; ii++)
             if (tds0[ii].innerHTML == rnr)
                 summe = summe + rnr;
-        document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe * Servierungsfaktor;
+        schreiben(rnr, snr, summe * Servierungsfaktor);
+        //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe * Servierungsfaktor;
     }
     else if (rnr == 8) {//Min
         for (let ii = 0; ii < 5; ii++)
             summe = summe + Number(tds0[ii].innerHTML);
         let f9 = Number(document.getElementById("tZettel").children[0].children[9 - 1].children[snr].innerHTML)
         if (f9 != -1 && summe >= f9)
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+            schreiben(rnr, snr, 0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
         else
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe;
+            schreiben(rnr, snr, summe);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe;
     }
     else if (rnr == 9) {//Max
         for (let ii = 0; ii < 5; ii++)
             summe = summe + Number(tds0[ii].innerHTML);
         let f8 = Number(document.getElementById("tZettel").children[0].children[8 - 1].children[snr].innerHTML)
         if (f8 != -1 && summe <= f8)
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+            schreiben(rnr, snr, 0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
         else
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe;
+            schreiben(rnr, snr, summe);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = summe;
     }
     else if (rnr == 10) {
-        let dreier = false;
-        let zweier = false;
-        BestimmeZahlenAnzahl();
-        for (let ii = 0; ii < 5; ii++) {
-            if (ZahlenAnzahl[ii] == 3)
-                dreier = true;
-            else if (ZahlenAnzahl[ii] == 2)
-                zweier = true;
-        }
-        if (dreier && zweier)
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 25 * Servierungsfaktor;
-        else document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+        if (fig =="Full")
+            schreiben(rnr, snr, 25 * Servierungsfaktor);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 25 * Servierungsfaktor;
+        else schreiben(rnr, snr, 0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
     }
     else if (rnr == 11) {
-        let possibleStreet= true;
-        BestimmeZahlenAnzahl()
-        for (let ii = 0; ii < 5; ii++)
-            if (ZahlenAnzahl[ii] > 1)
-                possibleStreet = false;
-
-        if (possibleStreet && (ZahlenAnzahl[0] == 0 || ZahlenAnzahl[5]==0))
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 30 * Servierungsfaktor;
-        else document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+        if (fig == "Street")
+            schreiben(rnr, snr, 30 * Servierungsfaktor);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 30 * Servierungsfaktor;
+        else schreiben(rnr, snr,0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
     }
     else if (rnr == 12) {
-        let vierer = false;
-        BestimmeZahlenAnzahl()
-        for (let ii = 0; ii < 5; ii++)
-            if (ZahlenAnzahl[ii] == 4)
-                vierer = true;
-            
-        if (vierer)
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 40 * Servierungsfaktor;
-        else document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+        if (fig == "Poker")        
+            schreiben(rnr, snr, 40 * Servierungsfaktor);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 40 * Servierungsfaktor;
+        else schreiben(rnr, snr, 0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
     }
     else if (rnr == 13) {
-        let funfer = false;
-        BestimmeZahlenAnzahl()
-        for (let ii = 0; ii < 5; ii++)
-            if (ZahlenAnzahl[ii] == 5)
-                funfer = true;
-
-        if (funfer)
-            document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 50 * Servierungsfaktor;
-        else document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
+        if (fig == "Grande")
+            schreiben(rnr, snr, 50 * Servierungsfaktor);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 50 * Servierungsfaktor;
+        else schreiben(rnr, snr, 0);
+            //document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = 0;
     }
     // Nächsten Wurf vorbereiten
     if (glAnz1 == 60) {
@@ -207,21 +193,22 @@ function feldclick(rnr, snr) {
     
     //  document.getElementById(rnr).style.background = "red";
 }
+
+function schreiben(rnr, snr, wert) {
+    document.getElementById("tZettel").children[0].children[rnr - 1].children[snr].innerHTML = wert;
+}
 function figur() {
-    BestimmeZahlenAnzahl()
-    
-    let vierer = false;
     let dreier = false;
     let zweier = false;
     let possibleStreet = true;
-    for (let ii = 0; ii < 5; ii++) {
+    for (let ii = 0; ii < 6; ii++) {
         if (ZahlenAnzahl[ii] > 1)
             possibleStreet = false;
 
         if (ZahlenAnzahl[ii] == 5)
             return "Grande";
         else if (ZahlenAnzahl[ii] == 4)
-            vierer = true;
+            return "Poker";
         else if (ZahlenAnzahl[ii] == 3)
             dreier = true;
         else if (ZahlenAnzahl[ii] == 2)
@@ -229,9 +216,7 @@ function figur() {
     }
  
     if (possibleStreet && (ZahlenAnzahl[0] == 0 || ZahlenAnzahl[5] == 0))
-        return "Street"
-    else if (vierer)
-        return "Poker";
+        return "Street"   
     else if (dreier && zweier)
         return "Full";
     else
