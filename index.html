@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <title>
-        Meine erstes Würfelprogramm
+        Würfelprogramm
     </title>
     <meta charset="UTF-8">
     <meta name="author" content="Harald Holzner">
@@ -173,7 +173,7 @@
             document.write(document.getElementById("tWurf").children.item(0).children.item(1).children.item(0).innerHTML)*/
             /* und so auch
             document.write(document.getElementById("tWurf").children[0].children[0].children[0].innerHTML)*/
-            let hoehe = window.innerHeight;
+            let hoehe = window.innerHeight;   // clientHeight ohne horizontale scrollbar 
             let Weite = window.innerWidth;
             document.getElementById("tWurf").style.width = Weite;
             document.getElementById("tWurf").style.height = hoehe;
